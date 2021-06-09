@@ -73,8 +73,10 @@
           Be the first to leave a comment for <strong><%= @nft.name %></strong>
       <% else %>
         <% @nft.comments.each do |comment|%>
+
         <p><%= comment.user.email %></p>
         <p id="comment-<%= comment.id %>"><%= comment.content %></p>
+        <% if comment.user.id == current_user.id %>
         <%= link_to 'Delete', nft_comment_path(@nft, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
         <!--nft_comment_path(nft_id: @nft.id, id: comment.id) use the same as-->
         <% end %>
@@ -83,6 +85,12 @@
       <%= simple_form_for([ @nft, @comment ], remote: true) do |f| %>
       <%= f.input :content %>
       <%= f.submit "Create Comment", class:"btn follow-button my-2" %>
+      <!-- Iuser logged in show avatar, name and delete button
+      comment @ delete display flex space between
+      name = comment stack on top
+      name = comment color
+      placeholder for text box- outline grey -->
+      <% end %>
       <% end %>
     </div>
     <!----------------------END---Comments---card ------------------------->
