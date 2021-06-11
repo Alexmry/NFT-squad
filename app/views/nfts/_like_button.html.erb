@@ -1,4 +1,4 @@
 <div class="like-icon mx-2 <%= 'red' if current_user.favorited?(nft) %>" data-id="<%= nft.id %>">
-  <i class="fas fa-heart"></i>
+  <i class="fas fa-heart"> You have <%=nft.favorited.count %></i>
 </div>
 <!-- red is a class (cf stylesheet). Can be found is the css file _card.scss line 38  -->
