@@ -1,52 +1,23 @@
-
-<div class="container" style="text-align: center;">
- <% @liked_nfts1.each do |nft| %>
-     <div class="d-flex justify-content-center">
-         <div class="card-main mt-5">
-             <% user = User.find(nft.user_id) %>
-             <% if nft.image_url %>
-                 <div class="title-card d-flex align-items-center p-2">
-                     <%= image_tag "https://kitt.lewagon.com/placeholder/users/cveneziani", class: "avatar-large", alt: "avatar" %>
-                     <div class="title-card-block px-3" id='nft-index-<%= nft.id %>'>
-                         <%= link_to "#{user.first_name} #{user.last_name}", user_path(user)%>
-                         <p><%= user.bio %></p>
-                         <% timeUTC = Time.now.utc - nft.created_at  %>
-                         <% time = (timeUTC / 60).to_i %>
-                         <% if time < 119 %>
-                             <p style="margin-bottom: 0px;"> <%= time %> min</p>
-                         <% else %>
-                             <% time = (time / 60).to_i %>
-                             <p style="margin-bottom: 0px;"> <%= time %> hours</p>
-                         <% end %>
-
-                     </div>
-                 </div>
-             <% end %>
-             <hr>
-             <%= link_to nft_path(nft), class:'text-decoration-none' do %>
-                 <p class="p-2">Created <%= nft.name %></p>
-                 <%= image_tag nft.image_url, height: 400, width: 500, crop: :fill %>
-             <% end %>
-             <div class="d-flex my-2 p-2 align-items-center">
-                 <%# if current_user.favorited?(nft) %>
-                   <%#= render 'like_button', heartColor: "❤️", nft: nft %>
-                 <%#else %>
-                   <%#= render 'like_button', heartColor: "🤍", nft: nft %>
-                 <%# end %>
-
-                 <%= link_to toggle_favorites_path(nft_id: nft.id), remote: true, style: "color: black;", method: :post do %>
-                 <!-- the link default is black -->
-                   <%= render 'like_button', nft: nft %>
-                 <% end %>
-                 <% nft.favoritors.each do |x| %>
-                 <%= x.first_name %>
-                 <% end %>
-
-                 <i class="far fa-comment" style="color:#E94A47;"> <%= nft.comments.count %> </i>
-             </div>
-         </div>
-     </div>
- <% end %>
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <% @liked_nfts1.each_with_index do |nft, index| %>
+    <div class="carousel-item <%= 'active' if index == 0 %>">
+      <div class="d-flex justify-content-center align-items-center">
+        <%= image_tag nft.image_url, height: 400, width: 500, crop: :fill %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    dffedfsdf
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
-
-

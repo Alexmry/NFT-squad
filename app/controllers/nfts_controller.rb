@@ -20,6 +20,7 @@ class NftsController < ApplicationController
         @liked_nfts1 << nft
       end
     end
+    @liked_nfts1 = @liked_nfts1[0..2]
   end
 
   def show
