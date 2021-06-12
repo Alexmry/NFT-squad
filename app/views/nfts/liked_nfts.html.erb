@@ -38,6 +38,9 @@
                  <!-- the link default is black -->
                    <%= render 'like_button', nft: nft %>
                  <% end %>
+                 <% nft.favoritors.each do |x| %>
+                 <%= x.first_name %>
+                 <% end %>
 
                  <i class="far fa-comment" style="color:#E94A47;"> <%= nft.comments.count %> </i>
              </div>
