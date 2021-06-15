@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   has_many :comments
   has_many :nfts
+  has_many :notifications
   has_one_attached :avatar
   include PgSearch::Model
   pg_search_scope :search_by_first_and_last_name,
