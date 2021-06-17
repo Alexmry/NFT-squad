@@ -17,6 +17,8 @@ class CommentsController < ApplicationController
       # Anchor is Using Ajax when the page updates/not reload, it will go to the new instance commnet (@comment.id) we just created in the HTML show page.
       # This can be found by ancoring to the comment.id
       # Around Line 80 show.html.erb
+      # in order to see the comment appear we need to refresh
+      # AJAX with Remote true and then redirect to refresh
     end
   end
 

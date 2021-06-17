@@ -5,7 +5,7 @@ class NftsController < ApplicationController
   def toggle_favorite
     @nft = Nft.find(params[:id])
     current_user.favorited?(@nft) ? current_user.unfavorite(@nft) : current_user.favorite(@nft)
-    # in order to see the like appear we need to refresh
+
   end
 
   def toggle_follow
@@ -30,7 +30,9 @@ class NftsController < ApplicationController
   def show
     @nft = Nft.find(params[:id])
     @user = User.find(@nft.user_id)
+    # @user is the User that has an NFT
     @comment = Comment.new
+    # Create a new comment functionality- but the save is in the post request created via a simple-form in the HTML
   end
 
   def new
@@ -43,10 +45,12 @@ class NftsController < ApplicationController
     else
       create_bool = false
     end
+    #If user clicks yes; in the html a hidden field tag :created turns true
     # checking if the nft is a creation or not
     url = "https://metadata.mintable.app/mintable_gasless/#{idToken}"
     response = RestClient.get(url)
     response_json = JSON.parse(response.body)
+    # get request to check toen on mintable
     nft = Nft.new(
       name: response_json["name"],
       image_url: response_json["image"],
@@ -56,14 +60,19 @@ class NftsController < ApplicationController
       media_type: "image",
       price: 100,
       creation: create_bool
+      # if new = true
     )
     if nft.save
+      # post request to save is in the html
       redirect_to user_path(current_user)
     else
       render :new
     end
   end
 end
+#Check raisl routes to see the type of request
+#If we select false/ create_bool = false the url is by default sending us to the owned section og the application.
+#User controller line 34
 
 # previous liked method
 # # @liked_nfts = {}
